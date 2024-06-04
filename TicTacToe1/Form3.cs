@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -8,7 +9,7 @@ namespace TicTacToe1
 {
     public partial class Form3 : Form
     {
-        private List<User> users = new List<User>();
+        public static List<User> users = new List<User>();
 
         public Form3()
         {
@@ -19,6 +20,7 @@ namespace TicTacToe1
         {
             string username = textBox1.Text;
             string password = textBox2.Text;
+            string confirmPassword = textBox3.Text;
 
             if (string.IsNullOrEmpty(textBox1.Text))
             {
@@ -33,13 +35,25 @@ namespace TicTacToe1
 
             }
 
+            else if (string.IsNullOrEmpty(textBox3.Text))
+            {
+                MessageBox.Show("Confirm password cannot be empty, try again!", "Player", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            else if (password != confirmPassword)
+            {
+                MessageBox.Show("Password does not match with confirm password, try again!", "Change Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             else if (hasSpecialChar(textBox1.Text) || hasSpecialChar(textBox2.Text))
             {
                 MessageBox.Show("Password cannot be empty, try again!", "Player", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            else 
+            else
             {
                 // Create Account Code
                 if (users.Any(user => user.GetUsername() == username))
@@ -55,54 +69,29 @@ namespace TicTacToe1
                 MessageBox.Show("Player created!", "Player", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 textBox1.Text = "";
                 textBox2.Text = "";
-                return;
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string username = textBox3.Text;
-            string password = textBox4.Text;
-
-            if (string.IsNullOrEmpty(username))
-            {
-                MessageBox.Show("Username cannot be empty, try again!", "Player", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            else if (string.IsNullOrEmpty(password))
-            {
-                MessageBox.Show("Password cannot be empty, try again!", "Player", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            else if (IsExistingPlayer(username, password))
-            {
-                MessageBox.Show("Log-in Successful", "Player", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Form1 form1 = new Form1();
-                form1.Show();
                 textBox3.Text = "";
-                textBox4.Text = "";
-            }
-            else
-            {
-                MessageBox.Show("Invalid username or password, please try again!", "Player", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBox3.Text = "";
-                textBox4.Text = "";
                 return;
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string username = textBox5.Text;
+            string username = textBox4.Text;
+            string oldPassword = textBox5.Text;
             string newPassword = textBox6.Text;
             string confirmPassword = textBox7.Text;
+
 
             // Check if username or new password are empty
             if (string.IsNullOrEmpty(username))
             {
                 MessageBox.Show("Username cannot be empty, try again!", "Change Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            else if (string.IsNullOrEmpty(oldPassword))
+            {
+                MessageBox.Show("Old password cannot be empty, try again!", "Change Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -119,6 +108,7 @@ namespace TicTacToe1
                 return;
             }
 
+
             // Check if username exists
             User user = users.FirstOrDefault(u => u.GetUsername() == username);
             if (user == null)
@@ -131,13 +121,19 @@ namespace TicTacToe1
             user.UpdatePassword(newPassword);
 
             MessageBox.Show("Password updated successfully!", "Change Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            textBox4.Text = "";
             textBox5.Text = "";
             textBox6.Text = "";
             textBox7.Text = "";
             return;
         }
 
-        private bool IsExistingPlayer(string username, string password)
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        public static bool IsExistingPlayer(string username, string password)
         {
             return users.Any(user => user.VerifyLogin(username, password));
         }
@@ -220,9 +216,19 @@ namespace TicTacToe1
             textBox2.PasswordChar = '*';
         }
 
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            textBox3.PasswordChar = '*';
+        }
+
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
             textBox4.PasswordChar = '*';
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            textBox5.PasswordChar = '*';
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
@@ -234,5 +240,6 @@ namespace TicTacToe1
         {
             textBox7.PasswordChar = '*';
         }
+
     }
 }
