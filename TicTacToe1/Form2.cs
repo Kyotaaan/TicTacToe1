@@ -14,6 +14,8 @@ namespace TicTacToe1
 {
     public partial class Form2 : Form
     {
+
+        public static string usrname = "";
         public static List<User> users = new List<User>();
 
         public Form2()
@@ -61,7 +63,6 @@ namespace TicTacToe1
 
         private void button2_Click(object sender, EventArgs e)
         {
-
             string username = textBox3.Text;
             string password = textBox4.Text;
 
@@ -85,6 +86,7 @@ namespace TicTacToe1
 
             else if (IsExistingPlayer(username, password))
             {
+                usrname = textBox3.Text;
                 MessageBox.Show("Log-in Successful", "Player", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Form1 form1 = new Form1();
                 form1.Show();

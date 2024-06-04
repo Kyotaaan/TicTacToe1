@@ -20,6 +20,7 @@ namespace TicTacToe1
         public Form1()
         {
             InitializeComponent();
+            label5.Text = Form2.usrname;
         }
 
         
