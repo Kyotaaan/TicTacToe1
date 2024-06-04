@@ -17,13 +17,12 @@ namespace TicTacToe1
         protected string btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
         private bool isPlayerX = true;
 
+
         public Form1()
         {
             InitializeComponent();
             label5.Text = Form2.usrname;
         }
-
-        
 
         private void Form1_Load(object sender, EventArgs e)
         {

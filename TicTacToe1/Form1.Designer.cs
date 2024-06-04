@@ -308,9 +308,8 @@
             this.label5.ForeColor = System.Drawing.Color.Black;
             this.label5.Location = new System.Drawing.Point(190, 12);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 63);
+            this.label5.Size = new System.Drawing.Size(0, 63);
             this.label5.TabIndex = 19;
-            this.label5.Text = "a";
             // 
             // Form1
             // 

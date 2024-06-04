@@ -32,7 +32,6 @@ namespace TicTacToe1
             {
                 MessageBox.Show("Password cannot be empty, try again!", "Player", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-
             }
 
             else if (string.IsNullOrEmpty(textBox3.Text))
@@ -60,7 +59,6 @@ namespace TicTacToe1
                 {
                     MessageBox.Show("Player name already exist!", "Player", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
-
                 }
 
                 // Add the user to the list
@@ -80,7 +78,6 @@ namespace TicTacToe1
             string oldPassword = textBox5.Text;
             string newPassword = textBox6.Text;
             string confirmPassword = textBox7.Text;
-
 
             // Check if username or new password are empty
             if (string.IsNullOrEmpty(username))
@@ -168,7 +165,7 @@ namespace TicTacToe1
         {
             public Player(string username, string password) : base(username, password)
             {
-
+                //mwehehe
             }
 
             public override void UpdatePassword(string newPassword)
@@ -207,7 +204,6 @@ namespace TicTacToe1
                 if (text.Contains(item))
                     return true;
             }
-
             return false;
         }
 
@@ -240,6 +236,5 @@ namespace TicTacToe1
         {
             textBox7.PasswordChar = '*';
         }
-
     }
 }
